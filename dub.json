@@ -1,0 +1,12 @@
+{
+	"name": "jokenwm",
+	"authors": [
+		"theoldmoon0602"
+	],
+	"dependencies": {
+		"xcb-d": "*"
+	},
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2018, theoldmoon0602",
+	"license": "MIT"
+}
