@@ -44,6 +44,7 @@ void main()
 		switch (event.response_type) {
 		case XCB_MAP_REQUEST:
 			auto e = cast(xcb_map_request_event_t*)event;
+			foreach (mod_mask; [0, XCB_MOD_MASK_2]) {
 			xcb_grab_button(conn, 1, e.window,
 					XCB_EVENT_MASK_BUTTON_PRESS|
 					XCB_EVENT_MASK_BUTTON_RELEASE|
@@ -52,12 +53,13 @@ void main()
 					XCB_GRAB_MODE_ASYNC,
 					e.window, XCB_NONE,
 					XCB_BUTTON_INDEX_1,  // LEFT BUTTON
-					XCB_MOD_MASK_1|XCB_MOD_MASK_2);
+					XCB_MOD_MASK_1|mod_mask);
 			xcb_grab_key(conn, 0, root,
-					XCB_MOD_MASK_1|XCB_MOD_MASK_2,
+					XCB_MOD_MASK_1|mod_mask,
 					cast(xcb_keycode_t)24,  //q
 					XCB_GRAB_MODE_ASYNC,
 					XCB_GRAB_MODE_ASYNC);
+			}
 			uint window_event = XCB_EVENT_MASK_STRUCTURE_NOTIFY|
 				XCB_EVENT_MASK_ENTER_WINDOW;
 			xcb_change_window_attributes(conn, e.window, XCB_CW_EVENT_MASK, &window_event);
