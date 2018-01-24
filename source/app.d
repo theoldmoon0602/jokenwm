@@ -44,7 +44,7 @@ void main()
 		switch (event.response_type) {
 		case XCB_MAP_REQUEST:
 			auto e = cast(xcb_map_request_event_t*)event;
-			foreach (mod_mask; [0, XCB_MOD_MASK_2]) {
+			foreach (mod_mask; [cast(ushort)0, cast(ushort)XCB_MOD_MASK_2]) {
 			xcb_grab_button(conn, 1, e.window,
 					XCB_EVENT_MASK_BUTTON_PRESS|
 					XCB_EVENT_MASK_BUTTON_RELEASE|
